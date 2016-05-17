@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+		body{
+			background: url(img/50.jpg);
+			background-size:cover;
+		}
+			#a{
+				width: 1050px;
+				height: 200px;
+				border:9px ridge green;
+				background: cover;
+				position: absolute;
+				top:450px;
+				left: 9%;
+			}
+			span{
+				width: 40px;
+				height: 40px;
+				background: cover;
+				display: inline-block;
+				margin: 7px;
+				text-align: center;
+				line-height: 40px;
+				color: white;
+				font-size: 25px;
+				border: 7px groove greenyellow;
+				cursor: pointer;
+			
+			}
+			.da{
+				width: 90px;
+				height: 90px;
+			}
+			input{
+				opacity: 0.7;
+				width: 500px;
+			height: 40px;
+			margin-left: 80px;
+			margin-top: 120px;
+			border: 2px solid red;
+			background: green;
+			border-radius: 6px;
+			color: white;
+			font-size: 40px;
+			
+			}
+			span:hover{
+				background: palegreen;
+				color: red;
+			}
+			
+			.daci {
+				animation: long 2s linear infinite;
+			}
+			
+			@-webkit-keyframes long {
+				perspective: 300px;
+				0% {
+					transform: scale(1);
+					opacity: 0;
+					background-color: #749a02; -webkit-box-shadow: 0 0 9px #333;
+				}
+				50% {
+					transform: scale(0.96) translateY(3px);
+					opacity: 0.3;
+					background-color: #91bd09; -webkit-box-shadow: 0 0 18px #91bd09;
+					
+				}
+				100% {
+					transform: scale(1) translateY(0);
+					opacity: 1;
+					background-color: lightpink; -webkit-box-shadow: 1 3 11px #333;
+				}
+		
+		</style>
+	</head>
+	<body>
+	<input class="text" type="text" name="" id="" value="" placeholder="说爱我，正如我说爱你一样。"/>
+		<div id="a">
+			
+		</div>
+		<script src="js/jquery-1.12.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+//		                                                                                     添加样式
+			function Qey(){
+				var a = '1234567890abcdefghijklmnopqrstuvwxyz.%';
+				var x = a.split('');
+			for(var i=0;i<38;i++){
+				if(i == 14){
+					$('div').append('<span>'+'删除'+'</span>');
+					$("span").eq(i).css("width","70px");
+				}
+				if(i == 28){
+					$('div').append('<span>'+'隐藏'+'</span>');
+					$("span").eq(29).css("width","70px");
+				}
+				if(i == 37){
+					$('div').append('<span>'+'空格'+'</span>');
+					$("span").eq(39).css("width","245px");
+				}
+				$('div').append('<span>'+a[i]+'</span>');
+			}
+			}
+			Qey();
+			
+			$('span').click(function(){
+				$('span').css("border-color","greenyellow");
+            $('span').css({'background':'lightpink','color':'white'});
+            $(this).toggleClass('daci');
+            
+      
+            $(this).css({'background':'gold','color':'white'});
+            var index=$(this).index();
+         
+            z=index;
+            var con = $('.text').val();
+            var val=con+this.innerHTML;
+            
+//                                监听事件
+           document.onkeydown=function (){
+           	var arr1 = [];
+            if (event.keyCode==37)//左键
+                fun_a();
+            if (event.keyCode==38)//上键
+                fun_b();
+            if (event.keyCode==39)//右键
+                fun_c();
+            if (event.keyCode==40)//下键
+                fun_d();
+            arr1.push($("span").eq(z).html());
+			console.log(arr1);
+			
+//			                                                                       光标进入执行命令
+			if(event.keyCode == 13){
+				function enter(){ if(z == 14){
+					var  xx = $('.text').val();
+          		
+            	$('.text').val(xx.substring(0,xx.length-1));
+				}else if(z == 29){
+            		$('#a').hide();
+//          		$('.text').val('');
+            }else if(z == 39){
+            	var ss = con+'再点空格打死你';
+            	console.log(ss)
+            	 $(".text").val(ss);
+            }else{
+				$(".text").val($(".text").val()+arr1);
+				}
+            }
+				enter();
+			}
+        }
+//                    判断删除   发送键
+          function dd(){ if(z == 14){
+          var  xx = con.substring(0,con.length-1);
+          		console.log(typeof(val));
+            	$('.text').val(xx);
+            }else if(z == 29){
+            		$('#a').hide();
+//          		$('.text').val('');
+            }else if(z == 39){
+            	var ss = con+'再点空格打死你';
+            	console.log(ss)
+            	 $(".text").val(ss);
+            }
+            else{
+            	 $(".text").val(val);
+            }
+            } 
+            dd();
+            
+        })
+//	                                                                     键盘 函数
+        var z;
+        function fun_a(){
+            if(z==0){
+                $("span").eq(z).css("border-color","tomato");
+                $("span").eq(z-1).css("border-color","greenyellow");
+            }
+            else {
+                $("span").eq(z - 1).css("border-color", "tomato");
+
+                $("span").eq(z).css("border-color", "greenyellow");
+                z = z - 1;
+            }
+        }
+        function fun_b(){
+            if(z>=0&&z<=14){
+                $("span").eq(z).css("border-color","tomato");
+                $("span").eq(z-15).css("border-color","greenyellow");
+            }
+            else {
+                $("span").eq(z-15).css("border-color","tomato");
+
+                $("span").eq(z).css("border-color","greenyellow");
+                z = z-15;
+            }
+        }
+        function fun_c(){
+            if(z>=40&&z<=41){
+                $("span").eq(z).css("border-color","tomato");
+                $("span").eq(z+1).css("border-color","greenyellow");
+            }
+            else{
+                $("span").eq(z+1).css("border-color","tomato");
+
+                $("span").eq(z).css("border-color","greenyellow");
+                z = z+1;
+            }
+        }
+        function fun_d(){
+            if(z>=26&&z<=41){
+                $("span").eq(z).css("border-color","tomato");
+                $("span").eq(z+15).css("border-color","greenyellow")
+            }
+            else{
+                $("span").eq(z+15).css("border-color","tomato")
+
+                $("span").eq(z).css("border-color","greenyellow")
+                z = z+15;
+            }
+        }
+        $('.text').click(function(){
+        	$('#a').slideDown();
+//      	$('.text').val('');
+        })
+			</script>
+	</body>
+</html>
